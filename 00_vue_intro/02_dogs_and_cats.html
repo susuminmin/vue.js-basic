@@ -49,6 +49,7 @@
             .then(response => {
               const imageUrl = response.data.message
               // 응답 받은 이미지 url 을 vue instance 의 dogImage 에 할당
+              // 내부적으로 this 사용하려면 무조건 arrow func 사용하기 
               this.dogImage = imageUrl
             })
         },
