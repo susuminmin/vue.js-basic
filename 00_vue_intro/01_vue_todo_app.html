@@ -8,26 +8,27 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <title>Todo App</title>
   <style>
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
+    .completed {
+      text-decoration: line-through;
+      opacity: 0.6;
     }
   </style>
 </head>
 
 <body>
   <div id="app">
-    <h1>To Do List</h1>
+    <h1 v-bind:style="{ color: activeColer, fontSize: fontSize + 'px' }">TODO APP</h1>
     <ul>
-      <li v-for="todo in todos" v-if="!todo.completed" v-on:click="toggleTodo(todo)">
+      <!-- <li v-for="todo in todos" v-if="!todo.completed" v-on:click="toggleTodo(todo)"> -->
+      <li v-for="todo in todos" v-bind:class="{ completed: todo.completed }">
+        <!-- v-model : input 값과 binding 하는 것 -->
+        <input type="checkbox" v-model="todo.completed"> <!-- 했니 안 했니 여부 -->
         <!-- true 면 보여주기 -->
-        <!-- v-for 가 높은 우선순위 -->
+        <!-- v-for 가 우선순위 높음 -->
         <!-- click 하면 자기 자신 값 바꿈 -->
         {{ todo.content }}
         <!-- 1. interpolation 으로 binding -->
-      <li v-else @click="toggleTodo(todo)">-------</li>
+        <!-- <li v-else @click="toggleTodo(todo)">-------</li> -->
       </li>
     </ul>
 
@@ -36,7 +37,7 @@
 
     <!-- 완료된 일 삭제하기 -->
     <footer>
-      <button @click="clearCompleted">완료된 일 삭제</button>
+      <button @click="clearCompleted">Clear Completed</button>
     </footer>
 
   </div>
@@ -44,8 +45,6 @@
 
 
   <script>
-
-
     const app = new Vue({
       el: '#app',
       // data 선언 : 항상 object 로 start
@@ -65,10 +64,12 @@
           },
           {
             content: '야자하기',
-            completed: false,
+            completed: true,
           }
         ],
         newTodo: '',
+        activeColer: 'salmon',
+        fontSize: 30,
       },
       methods: {
         toggleTodo: function (todo) {
@@ -86,9 +87,11 @@
         clearCompleted: function () {
           // Completed 가 true 인 모든 Todo 를 리스트에서 삭제한다. 
           // ==> Completed 가 false 인 todo 만 남는다. 
+
+
           // this.todos = this.todos.filter(todo => {
           //   return !todo.completed
-          // )}
+          // })
           this.todos = this.todos.filter(todo => !todo.completed)
         }
       }
@@ -98,3 +101,13 @@
 </body>
 
 </html>
+
+<!-- filter 대신 for 문으로 만드는 것도 연습 -->
+
+<!-- newTodos = []
+
+for (const todo of this.todos) {
+  if (!todo.completed) {
+    newTodos.push(todo)}
+}
+this.todos = newTodos -->
