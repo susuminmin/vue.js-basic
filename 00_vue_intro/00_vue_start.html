@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- library 설치 -->
+  <title>VUE Intro</title>
+</head>
+
+<body>
+  <div id="app">
+    {{ message }} : {{ count }}
+    <button v-on:click="plus">plus</button>
+    <button v-on:click="minus">minus</button>
+  </div>
+
+  <script>
+    // vue 코드가 되는 곳, app은 vue의 인스턴스
+    const app = new Vue({ //object 작성
+      el: '#app',  // app과 바인딩된 value값, div class="app", id='.app'
+      data: {  // data는 반드시 object start, value로 모든 객체 타입을 보여줄 수 있다
+        message: 'Hello, Vue.',
+        count: 0
+      },
+      /*
+      this = self와 비슷
+      this.message(vue가 가지는 메세지 값)
+       */
+      methods: {
+        plus: function () {  //function이라는 키워드로 plus를 정의해 this가 instance를 가리킨다
+          this.count++ //this: 우리가 생성한 view instance의미, ++count를 더하겠다
+        },
+        minus: function () {
+          this.count--
+        },  // data와 method의 키값이 겹치면 안된다
+        // arrow function을 이용하면 this는 자바스크립트의 최상위 객체인 windows를 가리킨다
+      }
+    })
+  </script>
+</body>
+
+</html>

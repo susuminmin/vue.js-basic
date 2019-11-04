@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <title>Dogs and Cats</title>
+  <style>
+    img {
+      width: 350px;
+      height: 350px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- button 을 누를 때마다 getDogImage 함수 실행 -->
+    <button v-on:click="getDogImage">멍멍</button><br>
+    <img v-bind:src="dogImage" alt="멍멍"><br> <!-- 2. v-bind 속성으로 binding -->
+    <button v-on:click="getCatImage">야옹</button><br>
+    <img v-bind:src="catImage" alt="야옹"><br>
+    <!-- short-cut -->
+    <!-- <img :src="catImage" alt="야옹"><br> -->
+  </div>
+
+
+  <script>
+    // 1. Vue instance 에 함수를 "정의" 할 때 - function 키워드 사용
+    // 2. Vue instance 에 정의된 함수에서 axios 및 call back 함수를 사용할 때 arrow function 사용
+    const app = new Vue({
+      el: '#app',
+      data: {
+        dogImage: '',
+        catImage: '',
+      },
+      methods: {
+        getDogImage: function () {
+          // 함수 
+          const DOG_API_URL = 'https://dog.ceo/api/breeds/image/random'
+          // API URL 로 요청 보내 응답 받은 강아지 사진 url 을 Vue Instance 의 dogImage 데이터 값에 할당
+          // this <= Vue instance 인데 
+          // function 키워드 사용하면,  함수 안에서는 this 가 무조건 window 임 
+          axios.get(DOG_API_URL)
+            // call-back 함수에는 arrow function 사용해야 함 
+            .then(response => {
+              const imageUrl = response.data.message
+              // 응답 받은 이미지 url 을 vue instance 의 dogImage 에 할당
+              this.dogImage = imageUrl
+            })
+        },
+        getCatImage: function () {
+          const CAT_API_URL = 'https://api.thecatapi.com/v1/images/search'
+          axios.get(CAT_API_URL)
+            .then(response => {
+              imageUrl = response.data[0].url
+              this.catImage = imageUrl
+            })
+        }
+      },
+
+      // 최초 vue instance 생성 후 실행하는 함수 
+      created: function () {
+        console.log('방금 렌더링 됐어요!')
+        this.getCatImage()
+        this.getDogImage()
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Counter</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <button id="counter">0</button> -->
+    <button @click="increase">증가</button>
+    <span>{{ count }}</span>
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        count: 0,
+      },
+      methods: {
+        increase: function () {
+          this.count++
+        }
+      }
+
+    })
+    // const counterBtn = document.querySelector('#counter')
+    // counterBtn.addEventListener('click', function (event) {
+    //   const count = Number(counterBtn.innerText) + 1
+    //   counterBtn.innerText = count
+    // })
+  </script>
+</body>
+
+</html>
