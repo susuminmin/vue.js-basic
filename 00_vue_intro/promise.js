@@ -77,6 +77,10 @@ getDataPromise()
     console.log(userinfo)
   })
 
+
+
+// axios 부분 로직을 고쳐보기 
+
 async function printData() {
   const data = await getDataPromise()
   console.log(data)

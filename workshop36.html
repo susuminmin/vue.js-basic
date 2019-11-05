@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <title>36</title>
+</head>
+
+<body>
+  <div id="app">
+    <button v-on:click="changeColor()">Toggle</button>
+    <h3 v-bind:style="{ color: activeColer }">빨강과 파랑을 섞으면 보라색이 됩니다.</h3>
+
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        activeColer: "blue",
+      },
+      methods: {
+        changeColor: function () {
+          if (this.activeColer === 'blue') {
+            this.activeColer = 'red'
+          } else if (this.activeColer === 'red') {
+            this.activeColer = 'blue'
+          }
+        }
+      }
+    })
+
+  </script>
+
+</body>
+
+</html>

@@ -18,6 +18,7 @@
     const API_URL = 'https://api.thecatapi.com/v1/images/search'
 
 
+
     // <희망편> 
     axios.get(API_URL)      // Promise <resolved> => response 데이터가 들어 있었음 
       .then(response => {   // Promise 의 valuse를 .then 메서드로 풀어줌
@@ -26,6 +27,16 @@
       .catch(error => {
         console.error(error)  // 만약 Promise 가 rejected 라면... .catch 를 찾아감
       })
+
+
+
+    const getCatImage = async function () {
+      const response = await axios.get(API_URL) // await 쓰면 .then 으로 풀어서 받지 않아도 됨
+      console.log(response)
+
+    }
+
+
 
 
     // <절망편> --> 거절 시 어떻게 처리?! 

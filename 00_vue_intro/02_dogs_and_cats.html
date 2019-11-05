@@ -38,28 +38,30 @@
         catImage: '',
       },
       methods: {
-        getDogImage: function () {
+        // 기존 방식 (Project X)
+        // getDogImage: function () {
+        getDogImage: async function () {
+
           // 함수 
           const DOG_API_URL = 'https://dog.ceo/api/breeds/image/random'
           // API URL 로 요청 보내 응답 받은 강아지 사진 url 을 Vue Instance 의 dogImage 데이터 값에 할당
           // this <= Vue instance 인데 
           // function 키워드 사용하면,  함수 안에서는 this 가 무조건 window 임 
-          axios.get(DOG_API_URL)
-            // call-back 함수에는 arrow function 사용해야 함 
-            .then(response => {
-              const imageUrl = response.data.message
-              // 응답 받은 이미지 url 을 vue instance 의 dogImage 에 할당
-              // 내부적으로 this 사용하려면 무조건 arrow func 사용하기 
-              this.dogImage = imageUrl
-            })
+
+          // // call-back 함수에는 arrow function 사용해야 함 
+          // .then(response => {
+          //   const imageUrl = response.data.message
+          //   // 응답 받은 이미지 url 을 vue instance 의 dogImage 에 할당
+          //   // 내부적으로 this 사용하려면 무조건 arrow func 사용하기 
+          //   this.dogImage = imageUrl
+          // })
+          const response = await axios.get(DOG_API_URL)
+          this.dogImage = response.data.message
         },
-        getCatImage: function () {
+        getCatImage: async function () {
           const CAT_API_URL = 'https://api.thecatapi.com/v1/images/search'
-          axios.get(CAT_API_URL)
-            .then(response => {
-              imageUrl = response.data[0].url
-              this.catImage = imageUrl
-            })
+          const response = await axios.get(CAT_API_URL)
+          this.catImage = response.data[0].url
         }
       },
 
