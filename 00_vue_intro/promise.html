@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <title>Promise</title>
+</head>
+
+<body>
+
+  <script>
+    // Promise : 비동기 작업 처리할 때 사용 객체 -> Promise 라는 객체 풀어주어야 함. 
+    // 성공하면 '.then' 구문으로 실패하면 '.catch' 구문으로
+    const API_URL = 'https://api.thecatapi.com/v1/images/search'
+
+
+    // <희망편> 
+    axios.get(API_URL)      // Promise <resolved> => response 데이터가 들어 있었음 
+      .then(response => {   // Promise 의 valuse를 .then 메서드로 풀어줌
+        console.log(response)
+      })
+      .catch(error => {
+        console.error(error)  // 만약 Promise 가 rejected 라면... .catch 를 찾아감
+      })
+
+
+    // <절망편> --> 거절 시 어떻게 처리?! 
+    // const BAD_API_URL = `https://api.thecatapi.com/v1/images/searc`
+
+    // axios.get(BAD_API_URL)
+    //   .catch(error => {    // Promise <rejected>
+    //     console.error(error)    // Promise 의 error 를 catch 를 통해 출력
+    //   })
+
+
+  </script>
+
+
+</body>
+
+</html>
