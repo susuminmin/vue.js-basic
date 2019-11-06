@@ -33,5 +33,14 @@ $ touch webpack.config.js # js 파일임
 --> webhack 한데 명령내리는 기능 
 * vue : 
 
+```
 `src` > `main.js` 기본 폴더 구조 
 * `src` 폴더에 source code 들 모아 놓음 
+```
+
+```shell
+# 5. webpack 은 js 파일만 변환 가능 --> vue 파일 및 template 을 webpack 이 변환하도록 도와주는 라이브러리 
+$ npm install -D vue-loader vue-template-compiler
+```
+
+* `public` > `index.html` 에서 `app.js` 사용할 것 

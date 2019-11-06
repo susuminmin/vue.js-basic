@@ -1,8 +1,10 @@
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const path = require('path')
 
 // nodejs 에서는 
 // 모듈에서 특정 값을 export 할 때 아래와 같이 module.exports 에 export 할 값들 정의
 module.exports = {
+  mode: 'development', // 상업용은 production 
   // 모든 파일들의 시작점, object 형식 작성   
   entry: {
     // __dirname : 최상위 위치 나타내는 기본변수 - 현재 디렉토리 이름 갖고 있음  
@@ -11,10 +13,23 @@ module.exports = {
 
   // webpack은 기본적으로 js만 변환 가능 --> CSS나 html 등은 모듈 통해서 webhack이 이해하도록 변환 필요 
   // 변환 내용 작성하는 곳
-  module: {},
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        use: 'vue-loader',
+      },
+      {
+        test: /\.css$/,
+        use: ['vue-style-loader', 'css-loader'],
+      }
+    ]
+  },
 
   // webpack 을 통해 번들된 결과를 추가 처리하는 부분 
-  plugins: {},
+  plugins: [
+    new VueLoaderPlugin(),
+  ],
 
   // webpack 을 통해 번들된 결과물이 정의되는 부분
   output: {

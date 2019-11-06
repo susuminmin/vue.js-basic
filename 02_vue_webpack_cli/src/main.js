@@ -1,14 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-// new Vue({
-//   render: function (createElement) {
-//     return createElement(app)
-//   }
-// })
-
 new Vue({
-  render: h => h(app)
+  render: h => h(App)
 }).$mount('#app')
 
 // 1. vue pjt 시작
