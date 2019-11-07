@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Todo</title>
+  <style>
+    .todo-list {
+      display: inline-block;
+      width: 33%;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="app">
+    <div class="todo-list">
+      <h2 style="color: purple;">취업준비</h2>
+      <input type="text" v-model="newTodo">
+      <!-- 누를 때마다 addTodo 함수 실행 -->
+      <button v-on:click="addTodo">+</button>
+      <ul>
+        <!-- TODO: todos 를 반복하며 todo 를 li 태그로 표현한다. -->
+        <li v-for="todo in todos" v-bind:key="todo.id">
+          <span>{{ todo.content }}</span>
+          <!-- TODO: 누를 때 마다 removeTodo 함수를 실행한다. -->
+          <button v-on:click="removeTodo(todo.id)">x</button>
+        </li>
+      </ul>
+    </div>
+    <br>
+    <div class="todo-list">
+      <h2 style="color: blue;">싸피</h2>
+      <input type="text" v-model="newTodo">
+      <!-- 누를 때마다 addTodo 함수 실행 -->
+      <button v-on:click="addTodo">+</button>
+      <ul>
+        <!-- TODO: todos 를 반복하며 todo 를 li 태그로 표현한다. -->
+        <li v-for="todo in todos" v-bind:key="todo.id">
+          <span>{{ todo.content }}</span>
+          <!-- TODO: 누를 때 마다 removeTodo 함수를 실행한다. -->
+          <button v-on:click="removeTodo(todo.id)">x</button>
+        </li>
+      </ul>
+    </div>
+    <br>
+    <div class="todo-list">
+      <h2 style="color: green;">기타</h2>
+      <input type="text" v-model="newTodo">
+      <!-- 누를 때마다 addTodo 함수 실행 -->
+      <button v-on:click="addTodo">+</button>
+      <ul>
+        <!-- TODO: todos 를 반복하며 todo 를 li 태그로 표현한다. -->
+        <li v-for="todo in todos" v-bind:key="todo.id">
+          <span>{{ todo.content }}</span>
+          <!-- TODO: 누를 때 마다 removeTodo 함수를 실행한다. -->
+          <button v-on:click="removeTodo(todo.id)">x</button>
+        </li>
+      </ul>
+    </div>
+
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        todos: [],
+        newTodo: '',
+      },
+      methods: {
+        addTodo: function () {
+          if (this.newTodo) {
+            // todos 에 item만 push하면 됨
+            this.todos.push({
+              id: new Date().getTime(), // db를 쓰면 db에서 가져와서 사용한다. 
+              content: this.newTodo,
+              completed: false
+            })
+            this.newTodo = ''
+          }
+        },
+        removeTodo: function (target_id) {
+          // TODO: todo 의 id 값을 인자로 받아 todos에서 해당 id 값을 가진 todo 를 삭제한다.
+          this.todos = this.todos.filter(todo => {
+            return todo.id !== target_id
+          })
+
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>
+
+<!-- v-bind:key="todo.id" -->
