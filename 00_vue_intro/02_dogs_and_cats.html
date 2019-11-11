@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
   <meta charset="UTF-8">
@@ -20,9 +20,10 @@
   <div id="app">
     <!-- button 을 누를 때마다 getDogImage 함수 실행 -->
     <button v-on:click="getDogImage">멍멍</button><br>
-    <img v-bind:src="dogImage" alt="멍멍"><br> <!-- 2. v-bind 속성으로 binding -->
+    <img v-bind:src="dogImage" alt="멍멍" /><br> <!-- 2. v-bind 속성으로 binding -->
     <button v-on:click="getCatImage">야옹</button><br>
-    <img v-bind:src="catImage" alt="야옹"><br>
+    <img v-bind:src="catImage" alt="야옹" /><br>
+
     <!-- short-cut -->
     <!-- <img :src="catImage" alt="야옹"><br> -->
   </div>
@@ -41,7 +42,6 @@
         // 기존 방식 (Project X)
         // getDogImage: function () {
         getDogImage: async function () {
-
           // 함수 
           const DOG_API_URL = 'https://dog.ceo/api/breeds/image/random'
           // API URL 로 요청 보내 응답 받은 강아지 사진 url 을 Vue Instance 의 dogImage 데이터 값에 할당

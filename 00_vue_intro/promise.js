@@ -4,12 +4,12 @@
 
 function getData() {
   // const data = {'data': 'somedata'}
-  let data
+  let data = null 
 
   setTimeout(() => {
     console.log('요청을 보냈습니다.')
-    data = { 'data': 'somedata' }     // 0.1 초 걸림
-  }, 100);
+    data = { 'data': 'somedata' }
+  }, 100);// 0.1 초 걸림
 
   return data // 가지고 오기만 하고 뭔가 실행은 못함 (idea: 함수를 넘겨주자! CallBack 함수 개념)
 }
@@ -22,7 +22,8 @@ function printData() {
 
 // printData()
 
-function getDataCallback(callback) { // 2. callback 으로 함수가 넘어옴. 즉, callback = 저 익명함수
+function getDataCallback(callback) {
+// 2. callback 으로 함수가 넘어옴. 즉, callback = 저 익명함수
   setTimeout(() => {
     console.log('INFO: 요청을 보냈습니다.')
     const data = { 'data': 'somedata' }

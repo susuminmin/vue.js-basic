@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
   <meta charset="UTF-8">
@@ -17,7 +17,7 @@
 
 <body>
   <div id="app">
-    <!-- v-bind 는 script에서 가져옴 -->
+    <!-- v-bind 는 Script에서 가져옴 -->
     <h1 v-bind:style="{ color: activeColer, fontSize: fontSize + 'px' }">TODO APP</h1>
 
     <select v-model="showMode">
@@ -28,16 +28,15 @@
 
 
     <ul>
-      <!-- v-for 돌 때 특정 html tag 과 item 서로 id로 bind 되어야 함 !-->
+      <!-- v-for 돌 때 특정 html tag & item이 id로 서로 bind 되어야 함 !-->
       <!-- <li v-for="todo in todos" v-if="!todo.completed" v-on:click="toggleTodo(todo)"> -->
+      <!-- v-for v-if 보다 우선순위 높음 -->
+      <!-- true 면 보여주기 -->
       <li v-for="todo in todoByShowMode" v-bind:class="{ completed: todo.completed }" v-bind:key="todo.id">
         <!-- 특성 속성값과 bind -->
-        <!-- v-model : input 값과 binding 하는 것 -->
+        <!-- v-model : 내가 input한 값과 binding 하는 것 -->
         <input type="checkbox" v-model="todo.completed"> <!-- 했니 안 했니 여부 -->
-        <!-- input 과 사용하는 것이 v-model -->
-        <!-- true 면 보여주기 -->
-        <!-- v-for 가 우선순위 높음 -->
-        <!-- click 하면 자기 자신 값 바꿈 -->
+        <!--checkbox를 click 하면 자기 자신 값 바꿈  -->
         {{ todo.content }}
         <!-- 1. interpolation 으로 binding -->
         <!-- <li v-else @click="toggleTodo(todo)">-------</li> -->
@@ -52,12 +51,6 @@
       <button @click="clearCompleted">Clear Completed</button>
     </footer>
 
-
-    <!-- {{ reversedNewTodo }} -->
-
-    <!-- computed 와 method 의 차이  -->
-    <!-- <p>{{ todoByShowMode }} </p> -->
-
   </div>
 
 
@@ -67,11 +60,11 @@
     const STORAGE_KEY = 'vue-todos'
     const todoStorage = {
       fetch: function () {
-        // string -> array 
+        // String -> Array
         return JSON.parse(localStorage.getItem(STORAGE_KEY)) // de-serializing 
       },
       save: function (todos) {
-        // array -> string 
+        // Array -> String
         localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
       },
     }
@@ -94,7 +87,6 @@
         //   todo.completed = !todo.completed
         //   todoStorage.save(this.todo)
         // },
-
         addTodo: function () {
           if (this.newTodo) {
             // todos 에 item만 push하면 됨
@@ -111,29 +103,26 @@
           // Completed 가 true 인 모든 Todo 를 리스트에서 삭제한다. 
           // ==> Completed 가 false 인 todo 만 남는다. 
 
-
           // this.todos = this.todos.filter(todo => {
           //   return !todo.completed
           // })
           this.todos = this.todos.filter(todo => !todo.completed)
           // todoStorage.save(this.todos)
         },
-
-        now2: function () {
-          return new Date().getTime()
-        }
+        // now2: function () {
+        //   return new Date().getTime()
       },
       // 함수와 달리 함수로 표현된 값으로 인식
       computed: {
-        reversedNewTodo: function () {
-          return this.newTodo.split('').reverse().join('')
-        },
-        now1: function () {
-          return new Date().getTime()
-        },
+        // reversedNewTodo: function () {
+        //   return this.newTodo.split('').reverse().join('')
+        // },
+        // now1: function () {
+        //   return new Date().getTime()
+        // },
         todoByShowMode: function () {
           // show Mode에 따라 ToDo List를 다르게 반환 
-          if (this.showMode === 'notCompleted') { // 미완료만 반환
+          if (this.showMode === 'notCompleted') {
             // 아직 미완료 일들만 모아서 반환          
             return this.todos.filter(todo => {
               return !todo.completed
@@ -142,13 +131,13 @@
             return this.todos.filter(todo => {
               return todo.completed
             })
-          } else {  // all
+          } else {  // === 'all'
             return this.todos
           }
         },
       },
       created() {
-        // vue instance 가 형성되면 실행하는 함수
+        // Vue instance 가 생성되면 실행하는 함수
         this.todos = todoStorage.fetch()
       },
       watch: { // 특정 데이터 바뀔 때마다 실행하는 함수 정의하는 곳
