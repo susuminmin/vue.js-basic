@@ -1,6 +1,6 @@
 <template>
   <li @click="onClick" class="list-group-item">
-    <img src="thumbnailUrl" alt="youtube-thumbnail">
+    <img :src="thumbnailUrl" alt="youtube-thumbnail">
     <div class="media-body" v-html="video.snippet.title"></div>
   </li>
 </template>
